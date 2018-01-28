@@ -97,6 +97,7 @@ fi
 
 if [[ ! -e $DIR_PLYMOUTH/themes/calux-logo/ ]]; then
      source $(dirname "$0")/new_calux/calux_splash.sh
+     cd
 fi
 ##########
 
