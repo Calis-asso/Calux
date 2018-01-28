@@ -62,7 +62,7 @@ if (( ! EUID == 0 )); then
 # on creer un alias pour gcompris
     ! cat .bashrc | grep -q "/opt/gcompris-qt-0.81-Linux/bin/gcompris-qt.sh" && echo "alias gcompris=\"/opt/gcompris-qt-0.81-Linux/bin/gcompris-qt.sh\"" >> ~/.bashrc
 # On installe la version FR de gcompris
-    [[ ! -e ~/.cache/KDE/gcompris-qt/data2/voices-ogg/voices-ogg/voices-fr.rcc ]] &&
+    [[ ! -e ~/.cache/KDE/gcompris-qt/data2/voices-ogg/voices-ogg/voices-fr.rcc ]] &&
     mkdir -p ~/.cache/KDE/gcompris-qt/data2/voices-ogg/ &&
     cd ~/.cache/KDE/gcompris-qt/data2/voices-ogg/ &&
     wget http://gcompris.net/data2/voices-ogg/voices-fr.rcc
