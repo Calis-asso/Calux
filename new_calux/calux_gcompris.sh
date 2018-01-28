@@ -12,26 +12,34 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #!/bin/bash
-URL_GCOMPRIS="http://gcompris.net/download/qt/linux/gcompris-qt-0.81-Linux64.sh"
 
-# On desinstalle gcompris de base...
-if [[ -e /usr/games/gcompris ]]; then
-    # On conserve l'icone et le lanceur
-    cp /usr/share/app-install/icons/gcompris.png /usr/share/icons/
-    cp /usr/share/applications/gcompris.desktop /tmp/
-    sed -i "s/Exec=gcompris/Exec=\/opt\/gcompris-qt-0.81-Linux\/bin\/gcompris-qt.sh/" /tmp/gcompris.desktop
-    apt remove -y gcompris gcompris-data gcompris-sound-fr
+# ARCH="32"
+[[ "$(uname -m)" == "x86_64" ]] && ARCH="64"
+[[ "$(uname -m)" == "i686" ]] && ARCH="32"
+if [[ ! -z $ARCH ]]; then
+    URL_GCOMPRIS="http://gcompris.net/download/qt/linux/gcompris-qt-0.81-Linux64.sh"
+
+    # On desinstalle gcompris de base...
+    if [[ -e /usr/games/gcompris ]]; then
+        # On conserve l'icone et le lanceur
+        cp /usr/share/app-install/icons/gcompris.png /usr/share/icons/
+        cp /usr/share/applications/gcompris.desktop /tmp/
+        sed -i "s/Exec=gcompris/Exec=\/opt\/gcompris-qt-0.81-Linux\/bin\/gcompris-qt.sh/" /tmp/gcompris.desktop
+        apt remove -y gcompris gcompris-data gcompris-sound-fr
+    fi
+    # Et on installe le nouveau
+    cd /opt
+    wget $URL_GCOMPRIS
+    chmod u+x gcompris-qt-0.81-Linux64.sh
+    ./gcompris-qt-0.81-Linux64.sh
+
+    # Et on supprime l'installeur
+    rm /opt/gcompris-qt-0.81-Linux64.sh
+
+    # On reinstalle le lanceur
+    [[ -e /tmp/gcompris.desktop ]] && cp /tmp/gcompris.desktop /usr/share/applications/gcompris.desktop
+    # # et on creer un alias pour gcompris 
+#     echo "alias gcompris=\"/opt/gcompris-qt-0.81-Linux/bin/gcompris-qt.sh\"" >> ~/.bashrc
+else
+    echo "Architecture invalide ! (i686 ou x64)"
 fi
-# Et on installe le nouveau
-cd /opt
-wget $URL_GCOMPRIS
-chmod u+x gcompris-qt-0.81-Linux64.sh
-./gcompris-qt-0.81-Linux64.sh
-
-# Et on supprime l'installeur
-rm /opt/gcompris-qt-0.81-Linux64.sh
-
-# On reinstalle le lanceur
-[[ -e /tmp/gcompris.desktop ]] && cp /tmp/gcompris.desktop /usr/share/applications/gcompris.desktop
-# # et on creer un alias pour gcompris
-# su -c "echo \"alias gcompris=/opt/gcompris-qt-0.81-Linux/bin/gcompris-qt.sh >> /home/user/.bashrc"

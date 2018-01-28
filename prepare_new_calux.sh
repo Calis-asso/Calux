@@ -120,4 +120,5 @@ cp $DIR_FILES/isolinux/* /etc/PinguyBuilder/isolinux/
 #
 source $(dirname "$0")/new_calux/calux_gcompris.sh
 
+cp -R "$(dirname "$0/new_calux/desktop/*")" ~/Bureau/
 exit
