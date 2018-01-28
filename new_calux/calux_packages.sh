@@ -21,7 +21,7 @@ install_package() {
 
 SOFTS2REMOVE="rhythmbox xplayer"
 # Les paquet a installer NOTE gcompris n'est pas la version qt mais on l'installe pour le lanceur tout pres...
-SOFTS2INSTALL="gcompris gbrainy gweled pychess gnome-sudoku gnome-mines gnome-mahjongg aisleriot clementine gnome-orca pidgin-otr pidgin-bot-sentry pidgin-microblog pidgin-privacy-please audacity clonezilla numlockx"
+SOFTS2INSTALL="gcompris gbrainy gweled pychess gnome-sudoku gnome-mines gnome-mahjongg aisleriot clementine gnome-orca pidgin-otr pidgin-bot-sentry pidgin-microblog pidgin-privacy-please audacity clonezilla numlockx nfs-common gparted"
 # On commence par mettre à jour la liste des paquets...
 apt update 
 # puis installer apt-cacher-ng pour gerer les paquets

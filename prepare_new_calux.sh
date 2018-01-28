@@ -42,7 +42,7 @@ add_user() {
 # END 
 
 # DIR_FILES="/mnt/IMGS/files"
-DIR_FILES="$(dirname "$0/new_calux/desktop/CALIS-INIT/files")"
+DIR_FILES="$(dirname "$0")/new_calux/desktop/CALIS-INIT/files"
 DIR_PLYMOUTH="/usr/share/plymouth"
 CALUX_VERSION="4.0"
 # SOFTS2INSTALL="gcompris gcompris-sound-fr gbrainy gweled pychess gnome-sudoku gnome-mines gnome-mahjongg aisleriot exaile exaile-plugin-contextinfo audacity gnome-orca pidgin-otr pidgin-bot-sentry pidgin-microblog pidgin-privacy-please"
@@ -66,6 +66,10 @@ if (( ! EUID == 0 )); then
     cd ~/.cache/KDE/gcompris-qt/data2/voices-ogg/
     wget http://gcompris.net/data2/voices-ogg/voices-fr.rcc
     
+#     On copie les outils de calux
+    cp -R $(dirname "$0")/new_calux/desktop/* ~/Bureau/
+    rm ~/Bureau/final_calux3.desktop # Fichier inutile sur calux 4.0
+
     exit $?
 fi
 
@@ -120,5 +124,4 @@ cp $DIR_FILES/isolinux/* /etc/PinguyBuilder/isolinux/
 #
 source $(dirname "$0")/new_calux/calux_gcompris.sh
 
-cp -R "$(dirname "$0/new_calux/desktop/*")" ~/Bureau/
 exit
