@@ -29,11 +29,11 @@ ping -q -c 1 "$IP_SRV" >/dev/null 2>&1
 ! [[ $? -eq 0 ]] && IP_SRV="$IP_SRV_CALIS" 
 # Et on install apt-cacher
 ping -q -c 1 "$IP_SRV" >/dev/null 2>&1
-if [[ $? -eq 0 ]] && command -v apt-cacher-ng >> /dev/null ; then
-    echo "Serveur $IP_SRV trouvé !"
-    ! apt search apt-cacher-ng | grep -q ^i && install_apt_cacher 
+if [[ $? -eq 0 ]]; then
+    echo "==> Serveur $IP_SRV trouvé !"
+    ! command -v apt-cacher-ng >> /dev/null && install_apt_cacher 
     # On lance apt-cacher
-    echo "Demarrage de apt-cacher-ng"
+    echo "  ->Demarrage de apt-cacher-ng"
     command -v systemctl >> /dev/null && systemctl restart apt-cacher-ng || sudo /etc/init.d/apt-cacher-ng restart
     # On modifie l'adresse du serveur
     echo "Acquire::http::proxy \"http://$IP_SRV:3142\";" > /tmp/02proxy

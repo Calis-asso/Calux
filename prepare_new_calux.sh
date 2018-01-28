@@ -107,24 +107,28 @@ fi
 #
 #   PinguyBuilder pour creer des isos
 #
-source $(dirname "$0")/new_calux/calux_pinguy.sh
-cd
-#Configuration de PinguyBuilder...
-# Et on personnalise ce qu'on veut...
-cat /etc/PinguyBuilder.conf | 
-sed "s/^\(LIVEUSER=\"\).*/\1calux\"/" | 
-sed "s/^\(LIVECDLABEL=\"\).*/\1Calux live $CALUX_VERSION\"/" | 
-sed "s/^\(CUSTOMISO=\"\).*/\1Calux-live-$CALUX_VERSION.iso\"/" | 
-sed "s/LIVECDURL=.*/LIVECDURL=\"http:\/\/calis-asso.org\"/" >> /tmp/PinguyBuilder.conf 
-cp -v /etc/PinguyBuilder.conf /etc/PinguyBuilder.conf.old 
-cp -v /tmp/PinguyBuilder.conf /etc/PinguyBuilder.conf 
-cp $DIR_FILES/isolinux/* /etc/PinguyBuilder/isolinux/
+if command -v PinguyBuilder >> /dev/null; then
+    source $(dirname "$0")/new_calux/calux_pinguy.sh
+    cd
+    #Configuration de PinguyBuilder...
+    # Et on personnalise ce qu'on veut...
+    cat /etc/PinguyBuilder.conf | 
+    sed "s/^\(LIVEUSER=\"\).*/\1calux\"/" | 
+    sed "s/^\(LIVECDLABEL=\"\).*/\1Calux live $CALUX_VERSION\"/" | 
+    sed "s/^\(CUSTOMISO=\"\).*/\1Calux-live-$CALUX_VERSION.iso\"/" | 
+    sed "s/LIVECDURL=.*/LIVECDURL=\"http:\/\/calis-asso.org\"/" >> /tmp/PinguyBuilder.conf 
+    cp -v /etc/PinguyBuilder.conf /etc/PinguyBuilder.conf.old 
+    cp -v /tmp/PinguyBuilder.conf /etc/PinguyBuilder.conf 
+    cp $DIR_FILES/isolinux/* /etc/PinguyBuilder/isolinux/
+fi
 ##########
 
 ##########
 #
 # Gcompris-qt
 #
-source $(dirname "$0")/new_calux/calux_gcompris.sh
-cd
+if [[ ! -e /opt/gcompris-qt-0.81-Linux/bin/gcompris-qt.sh ]]; then
+    source $(dirname "$0")/new_calux/calux_gcompris.sh
+    cd
+fi
 exit
