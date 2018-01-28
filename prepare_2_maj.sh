@@ -16,7 +16,7 @@
 
 install_apt_cacher() {
     echo "   -> Installation de apt-cacher-ng"
-    apt install apt-cacher-ng 
+    sudo apt install apt-cacher-ng 
 }
 
 #CHEZ MOI
@@ -34,17 +34,17 @@ if [[ $? -eq 0 ]]; then
     ! command -v apt-cacher-ng >> /dev/null && install_apt_cacher 
     # On lance apt-cacher
     echo "  ->Demarrage de apt-cacher-ng"
-    command -v systemctl >> /dev/null && systemctl restart apt-cacher-ng || sudo /etc/init.d/apt-cacher-ng restart
+    command -v systemctl >> /dev/null && sudo systemctl restart apt-cacher-ng || sudo /etc/init.d/apt-cacher-ng restart
     # On modifie l'adresse du serveur
     echo "Acquire::http::proxy \"http://$IP_SRV:3142\";" > /tmp/02proxy
     sudo cp /tmp/02proxy /etc/apt/apt.conf.d/02proxy   
 fi
 
 # Les MAJ
-apt update
-apt $1 upgrade
+sudo apt update
+sudo apt dist-upgrade $1
 
-[[ -e /etc/apt/apt.conf.d/02proxy ]] && rm /etc/apt/apt.conf.d/02proxy /tmp/02proxy
+[[ -e /etc/apt/apt.conf.d/02proxy ]] && sudo rm /etc/apt/apt.conf.d/02proxy /tmp/02proxy
 # On arrete apt-cacher-ng
 sudo /etc/init.d/apt-cacher-ng stop
 echo "Tapez \"exit\" ou faites \"Ctrl + D\" pour quitter." 

@@ -4,4 +4,4 @@ Some tools to personalise a LinuxMint distribution for usage of Calis assocation
 First download the whole project with git <br />
 $ git clone https://github.com/Calis-asso/Calux<br />
 then launch the script with bash :<br />
-$ bash Calux prepare_new_calux.sh<br />
+$ bash Calux/prepare_new_calux.sh<br />

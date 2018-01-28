@@ -30,14 +30,11 @@ apt update
 if ! command -v apt-cacher-ng >> /dev/null; then
     install_package apt-cacher-ng 
 fi
-if ping -c 2 192.168.2.1 >> /dev/null; then
+if ping -c 1 192.168.2.1 >> /dev/null; then
     echo "Acquire::http::proxy \"http://192.168.2.1:3142\";" > /etc/apt/apt.conf.d/02proxy   
 else
-    ping -c 2 192.168.0.111 >> /dev/null && echo "Acquire::http::proxy \"http://192.168.0.111:3142\";" > /etc/apt/apt.conf.d/02proxy    
+    ping -c 1 192.168.0.111 >> /dev/null && echo "Acquire::http::proxy \"http://192.168.0.111:3142\";" > /etc/apt/apt.conf.d/02proxy    
 fi
-
-# On installe le driver pour virtualbox
-! apt search virtualbox-guest-dkms | grep ^i >> /dev/null && install_package "virtualbox-guest-x11 virtualbox-guest-dkms"
 
 ##########
 #
@@ -53,6 +50,9 @@ apt purge -y $SOFTS2REMOVE
 #
 printf "  -> Mises à jour\n"
 apt dist-upgrade -y
+
+# On installe le driver pour virtualbox
+! apt search virtualbox-guest-dkms | grep ^i >> /dev/null && install_package "virtualbox-guest-x11 virtualbox-guest-dkms"
 
 ##########
 #

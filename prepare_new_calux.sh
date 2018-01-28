@@ -58,12 +58,13 @@ if (( ! EUID == 0 )); then
 # Modification de la page d'accueil
 # Ajout de ublock Origins en extension
 #
-    source $(dirname "$0")/conf_firefox.sh
+    [[ ! -e ~/.mozilla/firefox/calis.default ]] && source $(dirname "$0")/conf_firefox.sh
 # on creer un alias pour gcompris
-    echo "alias gcompris=\"/opt/gcompris-qt-0.81-Linux/bin/gcompris-qt.sh\"" >> ~/.bashrc
+    ! cat .bashrc | grep -q "/opt/gcompris-qt-0.81-Linux/bin/gcompris-qt.sh" && echo "alias gcompris=\"/opt/gcompris-qt-0.81-Linux/bin/gcompris-qt.sh\"" >> ~/.bashrc
 # On installe la version FR de gcompris
-    mkdir -p ~/.cache/KDE/gcompris-qt/data2/voices-ogg/
-    cd ~/.cache/KDE/gcompris-qt/data2/voices-ogg/
+    [[ ! -e ~/.cache/KDE/gcompris-qt/data2/voices-ogg/voices-ogg/voices-fr.rcc ]] &&
+    mkdir -p ~/.cache/KDE/gcompris-qt/data2/voices-ogg/ &&
+    cd ~/.cache/KDE/gcompris-qt/data2/voices-ogg/ &&
     wget http://gcompris.net/data2/voices-ogg/voices-fr.rcc
     cd
 #     On copie les outils de calux
@@ -76,7 +77,9 @@ fi
 
 
 printf "==> Préparation de la nouvelle %s\n" "Calux"
-    source $(dirname "$0")/new_calux/calux_packages.sh
+
+command -v xplayer >> /dev/null && 
+  source $(dirname "$0")/new_calux/calux_packages.sh
 
 printf "  ->Changement des fonctions des touches PgUp et PgDown pour chercher dans l'historique ( terminal feature )\n"			
 $sudo sed -i "s/# \(.*\)history-search-backward/\1history-search-backward/g" /etc/inputrc
@@ -107,7 +110,7 @@ fi
 #
 #   PinguyBuilder pour creer des isos
 #
-if command -v PinguyBuilder >> /dev/null; then
+if ! command -v PinguyBuilder >> /dev/null; then
     source $(dirname "$0")/new_calux/calux_pinguy.sh
     cd
     #Configuration de PinguyBuilder...
