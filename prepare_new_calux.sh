@@ -108,6 +108,7 @@ fi
 #   PinguyBuilder pour creer des isos
 #
 source $(dirname "$0")/new_calux/calux_pinguy.sh
+cd
 #Configuration de PinguyBuilder...
 # Et on personnalise ce qu'on veut...
 cat /etc/PinguyBuilder.conf | 

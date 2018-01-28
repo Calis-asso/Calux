@@ -18,6 +18,7 @@ URL_PINGUY="https://netix.dl.sourceforge.net/project/pinguy-os/ISO_Builder/pingu
 cd /tmp
 wget $URL_PINGUY && 
 # installation des dependances de pinguybuilder_4.3-8-beta
-apt install -y squashfs-tools ubiquity-frontend-debconf discover xresprobe aufs-tools dpkg-dev plymouth-x11 && 
+# apt install -y squashfs-tools ubiquity-frontend-debconf discover xresprobe aufs-tools dpkg-dev plymouth-x11 && 
+apt install -y squashfs-tools ubiquity-frontend-debconf discover aufs-tools dpkg-dev plymouth-x11 && 
 # installation des dependances de pinguybuilder_4.3-8-beta
 dpkg -i pinguybuilder*.deb 
