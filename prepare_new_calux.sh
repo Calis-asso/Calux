@@ -41,7 +41,8 @@ add_user() {
 
 # END 
 
-DIR_FILES="/mnt/IMGS/files"
+# DIR_FILES="/mnt/IMGS/files"
+DIR_FILES="$(dirname "$0/new_calux/desktop/CALIS-INIT/files")"
 DIR_PLYMOUTH="/usr/share/plymouth"
 CALUX_VERSION="4.0"
 # SOFTS2INSTALL="gcompris gcompris-sound-fr gbrainy gweled pychess gnome-sudoku gnome-mines gnome-mahjongg aisleriot exaile exaile-plugin-contextinfo audacity gnome-orca pidgin-otr pidgin-bot-sentry pidgin-microblog pidgin-privacy-please"
