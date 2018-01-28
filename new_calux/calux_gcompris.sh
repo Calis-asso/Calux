@@ -17,7 +17,7 @@
 [[ "$(uname -m)" == "x86_64" ]] && ARCH="64"
 [[ "$(uname -m)" == "i686" ]] && ARCH="32"
 if [[ ! -z $ARCH ]]; then
-    URL_GCOMPRIS="http://gcompris.net/download/qt/linux/gcompris-qt-0.81-Linux64.sh"
+    URL_GCOMPRIS="http://gcompris.net/download/qt/linux/gcompris-qt-0.81-Linux$ARCH.sh"
 
     # On desinstalle gcompris de base...
     if [[ -e /usr/games/gcompris ]]; then
@@ -30,11 +30,11 @@ if [[ ! -z $ARCH ]]; then
     # Et on installe le nouveau
     cd /opt
     wget $URL_GCOMPRIS
-    chmod u+x gcompris-qt-0.81-Linux64.sh
-    ./gcompris-qt-0.81-Linux64.sh
+    chmod u+x gcompris-qt-0.81-Linux$ARCH.sh
+    ./gcompris-qt-0.81-Linux$ARCH.sh
 
     # Et on supprime l'installeur
-    rm /opt/gcompris-qt-0.81-Linux64.sh
+    rm /opt/gcompris-qt-0.81-Linux$ARCH.sh
 
     # On reinstalle le lanceur
     [[ -e /tmp/gcompris.desktop ]] && cp /tmp/gcompris.desktop /usr/share/applications/gcompris.desktop

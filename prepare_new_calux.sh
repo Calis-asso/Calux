@@ -65,12 +65,12 @@ if (( ! EUID == 0 )); then
     mkdir -p ~/.cache/KDE/gcompris-qt/data2/voices-ogg/
     cd ~/.cache/KDE/gcompris-qt/data2/voices-ogg/
     wget http://gcompris.net/data2/voices-ogg/voices-fr.rcc
-    
+    cd
 #     On copie les outils de calux
     cp -R $(dirname "$0")/new_calux/desktop/* ~/Bureau/
     cp $(dirname "$0")/{prepare_2_maj.sh,build-iso-live.sh} ~/Bureau/CALIS-INIT/
     rm ~/Bureau/final_calux3.desktop # Fichier inutile sur calux 4.0
-
+    echo "Copie des outils terminés !"
     exit $?
 fi
 
@@ -126,5 +126,5 @@ cp $DIR_FILES/isolinux/* /etc/PinguyBuilder/isolinux/
 # Gcompris-qt
 #
 source $(dirname "$0")/new_calux/calux_gcompris.sh
-
+cd
 exit
