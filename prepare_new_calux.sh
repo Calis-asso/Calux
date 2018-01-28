@@ -68,6 +68,7 @@ if (( ! EUID == 0 )); then
     
 #     On copie les outils de calux
     cp -R $(dirname "$0")/new_calux/desktop/* ~/Bureau/
+    cp $(dirname "$0")/{prepare_2_maj.sh,build-iso-live.sh} ~/Bureau/CALIS-INIT/
     rm ~/Bureau/final_calux3.desktop # Fichier inutile sur calux 4.0
 
     exit $?
